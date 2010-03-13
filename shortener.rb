@@ -12,10 +12,10 @@ if ENV['DATABASE_USER'] && ENV['DATABASE_PASSWORD']
 end
 
 post '/shorten' do
-  shorten   params[:url]
-  slug    = slug_for params[:url]
-  @shortened = "/#{slug}"
-  haml :render
+  validate_url  params[:url]
+  shorten       params[:url]
+  slug    =     slug_for params[:url]
+  "http://#{request.host}/#{slug}"
 end
 
 get '/' do
@@ -27,6 +27,10 @@ get '/:slug' do |slug|
 end
 
 helpers do
+  def validate_url(url)
+    halt(500, "Duplicate") if url.index("http://#{request.host}") == 0
+  end
+  
   def shorten(url)
     if DB['urls'].find('url' => url).count == 0
       DB['urls'].insert('url' => url, 'slug' => DB['urls'].count.to_s(36))

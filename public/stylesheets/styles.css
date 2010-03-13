@@ -1,0 +1,47 @@
+body {
+	background-color: #F9F7ED;
+	font-family: Georgia;
+}
+
+#container {
+	padding: 10px;
+}
+
+#new_link_form {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 600px;
+	height: 20px;
+	margin-top: -50px;
+	margin-left: -300px;
+	padding: 10px;
+	color: #36393D;
+}
+	#new_link_form label {
+		font-size: 28px;
+		position: relative;
+		top: 2px;
+	}
+	
+	#new_link_form input[type=text] {
+		margin-left: 10px;
+		height: 24px;
+		padding: 3px;
+		width: 400px;
+		font-size: 20px;
+	}
+	
+	#new_link_form .submit {
+		font-size: 50px;
+		position: relative;
+		top: 10px;
+		left: 8px;
+	}
+	
+		#new_link_form .submit a,
+		#new_link_form .submit a:visited {
+			text-decoration: none;
+			color: #36393D;
+			outline: none;
+		}

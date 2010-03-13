@@ -1,5 +1,7 @@
-%form{:method => "post", :action => "/shorten"}
-	#shorten
-		%label{:for => "url_input"} URL:
-		%input{:type => "text", :name => "url", :id => "url_input"}
-		%input{:type => "submit", :value => "Shorten!"}
+#new_link_form
+	%form{:method => "post", :action => "/shorten", :id => "shorten_form"}
+		#shorten
+			%label{:for => "url_input"} URL:
+			%input{:type => "text", :name => "url", :id => "url_input"}
+			%span.submit 
+				%a →
