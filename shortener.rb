@@ -28,7 +28,8 @@ end
 
 helpers do
   def validate_url(url)
-    halt(500, "Duplicate") if url.index("http://#{request.host}") == 0
+    halt(400, "Duplicate") if url.index("http://#{request.host}") == 0
+    halt(400, "Bad URL") if (url =~ /^(https?|ftp)\:\/\//i) == nil
   end
   
   def shorten(url)
