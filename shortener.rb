@@ -18,6 +18,14 @@ post '/shorten' do
   "http://#{request.host}/#{slug}"
 end
 
+get '/signup' do
+  haml :profile
+end
+
+post '/signup' do
+  
+end
+
 get '/' do
   haml :new
 end
@@ -43,6 +51,13 @@ helpers do
   end
  
   def url_for(slug)
-    DB['urls'].find('slug' => slug).collect {|row| row['url'] }.flatten
+    row = DB['urls'].find_one({'slug' => slug})
+    unless row.nil?
+      row['hits'] = row['hits'].nil? ? 1 : row['hits'].to_i + 1
+      DB['urls'].save(row)
+      return row['url']
+    else
+      halt(404, "Not found")
+    end
   end
 end

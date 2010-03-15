@@ -1,0 +1,12 @@
+#signup_form
+	%form{:method => "post", :action => "/signup"}
+		.field
+			%label{:for => "email"} Email:
+			%input{:type => "text", :name => "email", :id => "email"}	
+		.field
+			%label{:for => "password"} Password:
+			%input{:type => "password", :name => "password", :id => "password"}
+		.field
+			%label{:for => "password_confirmation"} Password confirmation:
+			%input{:type => "password_confirmation", :name => "password_confirmation", :id => "password_confirmation"}
+		%input{:type => "submit", :value => "Sign Up"}
