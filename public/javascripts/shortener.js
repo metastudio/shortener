@@ -11,4 +11,7 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+	$("#new_link_form input[type=text]").focus(function() {
+		
+	});
 });
