@@ -51,5 +51,7 @@ body {
 #tip {
 	margin-top: 10px;
 	background-color: #ccc;
-	padding: 5px;
+	padding: 15px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }

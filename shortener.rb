@@ -1,15 +1,25 @@
-# shortener.rb
 require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'mongo'
+require 'mongo_mapper'
+require 'digest/sha1'
+require 'rack-flash'
+require 'sinatra-authentication'
+
+use Rack::Session::Cookie, :secret => 'jwdgpo2jen0xu3-0332'
+use Rack::Flash
 
 include Mongo
+require 'models/url'
+require 'models/mm_user'
 
-DB = Connection.new(ENV['DATABASE_URL'] || 'localhost').db('shortener')
+DB = Connection.new(ENV['DATABASE_URL'] || 'localhost')
+MongoMapper.connection = DB
 if ENV['DATABASE_USER'] && ENV['DATABASE_PASSWORD']
   auth = DB.authenticate(ENV['DATABASE_USER'], ENV['DATABASE_PASSWORD'])
 end
+MongoMapper.database = 'shortener'
 
 post '/shorten' do
   validate_url  params[:url]
@@ -41,17 +51,20 @@ helpers do
   end
   
   def shorten(url)
-    if DB['urls'].find('url' => url).count == 0
-      DB['urls'].insert('url' => url, 'slug' => DB['urls'].count.to_s(36))
+    if URL.all(:url => url).count == 0
+      URL.create({
+        :url  => url,
+        :slug => URL.count.to_s(36),
+      })
     end
   end
  
   def slug_for(url)
-    DB['urls'].find('url' => url).collect {|row| row['slug'] }.flatten
+    URL.first(:url => url).slug
   end
  
   def url_for(slug)
-    row = DB['urls'].find_one({'slug' => slug})
+    row = URL.first(:slug => slug)
     unless row.nil?
       row['hits'] = row['hits'].nil? ? 1 : row['hits'].to_i + 1
       DB['urls'].save(row)
