@@ -12,6 +12,7 @@ class Url
   belongs_to :mm_user
   
   def hit
+    self.hits = 0 if hits.nil?
     self.hits += 1
     self.save
   end
