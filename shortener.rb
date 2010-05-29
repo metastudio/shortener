@@ -28,6 +28,10 @@ post '/shorten' do
   "http://#{request.host}/#{slug}"
 end
 
+get '/mine' do
+  haml :links
+end
+
 get '/signup' do
   haml :profile
 end

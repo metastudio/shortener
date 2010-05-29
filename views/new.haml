@@ -5,9 +5,10 @@
 			%input{:type => "text", :name => "url", :id => "url_input"}
 			%span.submit 
 				%a →
-		#tip 
-			Paste the link and press «Enter» to shorten your URL. 
+		.tip.tip1
+			Paste the link and press «Enter» to shorten your URL.
+		.tip.tip2
 			- if logged_in?
-				<a href="/logout">Logout</a>.
+				Hi, #{current_user.email}. <a href="/mine">Your links</a> | <a href="/logout">Logout</a>
 			- else
-				Registered user? <a href="/login">Sign in</a>.
+				Registered user? <a href="/login">Sign in</a> or <a href="/signup">Sign up</a>.
