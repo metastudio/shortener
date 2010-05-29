@@ -1,0 +1,12 @@
+%table
+	%thead
+		%tr
+			%th Slug
+			%th Url
+			%th Hits
+	%tbody
+		- for url in current_user.urls
+			%tr
+				%td #{url.slug}
+				%td <a href="">#{url.url}</a>
+				%td <a href="">#{url.hits}</a>

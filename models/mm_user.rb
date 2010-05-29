@@ -1,6 +1,7 @@
 class MmUser
+  include MongoMapper::Document
+
   key :name, String
-  def test(val)
-    update({:name => "andrey"})
-  end
+    
+  many :urls
 end

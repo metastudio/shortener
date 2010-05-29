@@ -37,7 +37,7 @@ get '/signup' do
 end
 
 post '/signup' do
-  
+
 end
 
 get '/' do
@@ -55,26 +55,23 @@ helpers do
   end
   
   def shorten(url)
-    if URL.all(:url => url).count == 0
-      URL.create({
-        :url  => url,
-        :slug => URL.count.to_s(36),
+    if Url.all(:url => url).count == 0
+      Url.create({
+        :url     => url,
+        :slug    => Url.count.to_s(36),
+        :hits    => 0,
+        :mm_user => current_user,
       })
     end
   end
  
   def slug_for(url)
-    URL.first(:url => url).slug
+    Url.first(:url => url).slug
   end
  
   def url_for(slug)
-    row = URL.first(:slug => slug)
-    unless row.nil?
-      row['hits'] = row['hits'].nil? ? 1 : row['hits'].to_i + 1
-      DB['urls'].save(row)
-      return row['url']
-    else
-      halt(404, "Not found")
-    end
+    row = Url.first(:slug => slug)
+    (row.hit and return row['url']) unless row.nil?
+    halt(404, "Not found")
   end
 end
