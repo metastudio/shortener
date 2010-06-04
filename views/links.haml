@@ -1,3 +1,4 @@
+%h1 Mine links are so mine
 %table
 	%thead
 		%tr
@@ -7,6 +8,7 @@
 	%tbody
 		- for url in current_user.urls
 			%tr
-				%td #{url.slug}
-				%td <a href="">#{url.url}</a>
-				%td <a href="">#{url.hits}</a>
+				%td <a href="http://#{request.host}/#{url.slug}">#{url.slug}</a>
+				%td <a href="#{url.url}">#{url.url}</a>
+				%td #{url.hits}
+%a{:href => "/"} Go home

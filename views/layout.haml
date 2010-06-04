@@ -7,7 +7,11 @@
 		%script{:type => "text/javascript", :src => "/javascripts/jquery-1.4.2.min.js"}
 		%script{:type => "text/javascript", :src => "/javascripts/shortener.js"}
 	%body
-		#container= yield
+		#container
+			- unless flash[:notice].nil?
+				#notice= flash[:notice]
+			= yield
+		#footer
 	:javascript
 		var is_ssl = ("https:" == document.location.protocol);
 		var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";

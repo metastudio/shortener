@@ -29,15 +29,8 @@ post '/shorten' do
 end
 
 get '/mine' do
+  login_required
   haml :links
-end
-
-get '/signup' do
-  haml :profile
-end
-
-post '/signup' do
-
 end
 
 get '/' do

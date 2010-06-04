@@ -62,3 +62,22 @@ body {
 .tip2 {
 	background-color: #bbb;
 }
+
+#notice {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background-color: #FFFF88;
+	padding: 8px;
+	float: left;
+}
+
+table th {
+	background-color: #CDEB8B;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+table th,
+table td {
+	text-align: left;
+	padding: 8px;
+}
