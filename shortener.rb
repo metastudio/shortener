@@ -56,12 +56,13 @@ helpers do
   
   def shorten(url)
     if Url.all(:url => url).count == 0
-      Url.create({
+      params = {
         :url     => url,
         :slug    => Url.count.to_s(36),
         :hits    => 0,
-        :mm_user => current_user,
-      })
+      }
+      params[:mm_user] = current_user if logged_in?
+      Url.create(params)
     end
   end
  
