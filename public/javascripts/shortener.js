@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("#new_link_form input[type=text]").focus();
 	$("#shorten_form .submit a").attr("href", "#shorten").click(function() {
 		$("#shorten_form").submit();
 		return false;
@@ -10,8 +11,5 @@ $(document).ready(function() {
 			input.val(response).select();
 		});
 		return false;
-	});
-	$("#new_link_form input[type=text]").focus(function() {
-		
 	});
 });
