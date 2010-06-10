@@ -81,3 +81,7 @@ table td {
 	text-align: left;
 	padding: 8px;
 }
+
+div.field input {
+	padding: 3px;
+}
