@@ -1,11 +1,14 @@
-require 'rubygems'
-require 'sinatra'
-require 'haml'
-require 'mongo'
-require 'mongo_mapper'
-require 'digest/sha1'
-require 'rack-flash'
-require 'sinatra-authentication'
+require "rubygems"
+require "bundler"
+Bundler.setup
+
+require "sinatra"
+require "haml"
+require "mongo"
+require "mongo_mapper"
+require "digest/sha1"
+require "rack-flash"
+require "sinatra-authentication"
 
 use Rack::Session::Cookie, :secret => 'jwdgpo2jen0xu3-0332'
 use Rack::Flash
