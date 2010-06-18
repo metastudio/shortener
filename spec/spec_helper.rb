@@ -1,7 +1,5 @@
 require File.join(File.dirname(__FILE__), '..', 'shortener.rb')
 
-require 'rubygems'
-require 'sinatra'
 require 'rack/test'
 require 'spec'
 require 'spec/autorun'
