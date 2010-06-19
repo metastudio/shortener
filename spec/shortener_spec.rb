@@ -4,14 +4,16 @@ describe "My App" do
   include Rack::Test::Methods
   
   before(:each) do
-    @user = MmUser.create({
-      :email    => "test@user.com",
-      :password => "12345",
-    })
+    MmUser.destroy_all
+    @user = MmUser.make
   end
 
   def app
     @app ||= Sinatra::Application
+  end
+  
+  def do_login
+    post '/login', {:email => @user.email, :password => @user.password}
   end
 
   it "should respond to /" do
@@ -25,7 +27,7 @@ describe "My App" do
   end
   
   it "should shorten urls for registered users" do
-    post '/login', {:email => @user.email, :password => @user.password}
+    do_login
     last_response.status.should == 302
     get '/'
     last_response.body.include?("Hi, #{@user.email}").should be_true
@@ -34,6 +36,13 @@ describe "My App" do
   end
   
   it "should show posted urls for registered user" do
-    pending
+    3.times { |i| Url.make(:mm_user => @user, :url => "http://example.ru/#{i}") }
+    do_login
+    last_response.status.should == 302
+    get '/mine'
+    last_response.body.include?("Mine links are so mine").should be_true
+    last_response.body.include?("http://example.ru/0").should be_true
+    last_response.body.include?("http://example.ru/1").should be_true
+    last_response.body.include?("http://example.ru/2").should be_true
   end
 end

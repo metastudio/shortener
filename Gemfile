@@ -12,4 +12,5 @@ group :test do
   gem "rack-test", "0.5.4"
   gem "rspec", "1.3.0"
   gem "rr", "0.10.11"
+  gem "machinist_mongo", :git => "http://github.com/nmerouze/machinist_mongo.git"
 end
